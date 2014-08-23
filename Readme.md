@@ -111,3 +111,20 @@ A slightly more complicated idea is to support general referencing in articles
 and pages, by having some BibTeX entries local to the page, and rendering the
 bibliography at the end of the article, with anchor links pointing to the right
 place.
+
+NOTES from Dan
+==============
+
+1. I have changed the fields from,
+
+    ```
+    (key, year, text, bibtex, pdf, slides, poster)
+    ```
+    to 
+    ```
+    (key, type, year, text, pdf, slides, poster, code)
+    ```
+    Where `type` is the bibtex entry type.
+
+2. I have also made sure that all of the entries in `publications` are sorted
+   descending by year.
