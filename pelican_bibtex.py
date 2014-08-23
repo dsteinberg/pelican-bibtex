@@ -69,12 +69,14 @@ def add_publications(generator):
     for formatted_entry in formatted_entries:
         key = formatted_entry.key
         entry = bibdata_all.entries[key]
+        btype = entry.type
         year = entry.fields.get('year')
         # This shouldn't really stay in the field dict
         # but new versions of pybtex don't support pop
         pdf = entry.fields.get('pdf', None)
         slides = entry.fields.get('slides', None)
         poster = entry.fields.get('poster', None)
+        code = entry.fields.get('code', None)
 
         #render the bibtex string for the entry
         bib_buf = StringIO()
@@ -83,13 +85,16 @@ def add_publications(generator):
         text = formatted_entry.text.render(html_backend)
 
         publications.append((key,
+                             btype,
                              year,
                              text,
-                             bib_buf.getvalue(),
                              pdf,
                              slides,
-                             poster))
+                             poster,
+                             code))
 
+    # Sort by year
+    publications.sort(key=lambda field: field[2], reverse=True)
     generator.context['publications'] = publications
 
 
